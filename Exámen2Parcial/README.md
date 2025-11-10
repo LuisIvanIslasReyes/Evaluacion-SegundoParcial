@@ -9,17 +9,17 @@ Este proyecto implementa un sistema completo de predicción de diabetes utilizan
 ## Descripción del Proyecto
 
 ### Parte 1: Análisis y Entrenamiento del Modelo
-- ✅ Análisis Exploratorio de Datos (EDA)
-- ✅ Preprocesamiento y limpieza de datos
-- ✅ Entrenamiento de múltiples modelos (Logistic Regression, KNN, Random Forest)
-- ✅ Optimización con GridSearchCV
-- ✅ Evaluación exhaustiva con múltiples métricas
+-  Análisis Exploratorio de Datos (EDA)
+-  Preprocesamiento y limpieza de datos
+-  Entrenamiento de múltiples modelos (Logistic Regression, KNN, Random Forest)
+-  Optimización con GridSearchCV
+-  Evaluación exhaustiva con múltiples métricas
 
 ### Parte 2: Despliegue Web
-- ✅ Persistencia del modelo con joblib
-- ✅ Aplicación web con Flask
-- ✅ Interfaz de usuario intuitiva
-- ✅ Sistema de predicción en tiempo real
+-  Persistencia del modelo con joblib
+-  Aplicación web con Flask
+-  Interfaz de usuario intuitiva
+-  Sistema de predicción en tiempo real
 
 ---
 
