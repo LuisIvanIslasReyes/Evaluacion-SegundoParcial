@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca del Modelo - Predictor de Diabetes</title>
+    <!-- Font Awesome for professional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-book"></i>Acerca del Modelo</h1>
+            <p>Información técnica sobre el sistema de predicción</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h2><i class="fas fa-bullseye"></i>Descripción del Proyecto</h2>
+            <p>
+                Este sistema de predicción de diabetes fue desarrollado como parte de la 
+                <strong>Evaluación del Segundo Parcial</strong> de la materia de Base de Datos.
+                Utiliza técnicas de Machine Learning para predecir la probabilidad de que un 
+                paciente desarrolle diabetes basándose en datos médicos.
+            </p>
+
+            <h2><i class="fas fa-robot"></i>Información del Modelo</h2>
+            <p><strong>Modelo Utilizado:</strong> {{ model_info.model_name }}</p>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h3>Accuracy</h3>
+                    <div class="value">{{ "%.2f"|format(model_info.accuracy * 100) }}%</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Precision</h3>
+                    <div class="value">{{ "%.4f"|format(model_info.precision) }}</div>
+                </div>
+                <div class="metric-card">
+                    <h3>Recall</h3>
+                    <div class="value">{{ "%.4f"|format(model_info.recall) }}</div>
+                </div>
+                <div class="metric-card">
+                    <h3>F1-Score</h3>
+                    <div class="value">{{ "%.4f"|format(model_info.f1_score) }}</div>
+                </div>
+                <div class="metric-card">
+                    <h3>AUC</h3>
+                    <div class="value">{{ "%.4f"|format(model_info.auc) }}</div>
+                </div>
+            </div>
+
+            <h2><i class="fas fa-chart-line"></i>Características del Modelo</h2>
+            <p>El modelo utiliza las siguientes 8 características médicas para realizar sus predicciones:</p>
+            
+            <div class="features-list">
+                <ul>
+                    {% for feature_name, feature_data in feature_info.items() %}
+                    <li>
+                        <strong>{{ feature_data.label }}</strong>
+                        <span>{{ feature_data.description }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <h2><i class="fas fa-laptop-code"></i>Tecnologías Utilizadas</h2>
+            <div class="tech-stack">
+                <span class="tech-item">Python</span>
+                <span class="tech-item">scikit-learn</span>
+                <span class="tech-item">Flask</span>
+                <span class="tech-item">pandas</span>
+                <span class="tech-item">NumPy</span>
+                <span class="tech-item">Joblib</span>
+                <span class="tech-item">HTML5</span>
+                <span class="tech-item">CSS3</span>
+                <span class="tech-item">JavaScript</span>
+            </div>
+
+            <h2><i class="fas fa-tasks"></i>Proceso de Desarrollo</h2>
+            <p>
+                El desarrollo de este sistema siguió las siguientes etapas:
+            </p>
+            <ol style="margin-left: 20px; line-height: 2;">
+                <li><strong>Análisis Exploratorio de Datos (EDA)</strong> - Comprensión del dataset de diabetes</li>
+                <li><strong>Preprocesamiento</strong> - Limpieza y normalización de datos</li>
+                <li><strong>Entrenamiento de Modelos</strong> - Evaluación de múltiples algoritmos</li>
+                <li><strong>Optimización</strong> - GridSearchCV para encontrar los mejores hiperparámetros</li>
+                <li><strong>Validación</strong> - Evaluación exhaustiva con múltiples métricas</li>
+                <li><strong>Despliegue</strong> - Implementación de la aplicación web con Flask</li>
+            </ol>
+
+            <h2><i class="fas fa-exclamation-triangle"></i>Disclaimer</h2>
+            <p style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+                <strong>Importante:</strong> Este sistema es un proyecto académico y educativo. 
+                No debe utilizarse como sustituto del diagnóstico médico profesional. 
+                Siempre consulte a un profesional de la salud para obtener un diagnóstico 
+                y tratamiento adecuado.
+            </p>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="/" class="btn-back"><i class="fas fa-arrow-left"></i>Volver al Predictor</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Evaluación Segundo Parcial - Base de Datos</p>
+            <p>Universidad Tecnológica de Tijuana</p>
+        </div>
+    </div>
+</body>
+</html>

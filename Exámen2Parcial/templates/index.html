@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictor de Diabetes - Sistema de ML</title>
+    <!-- Font Awesome for professional icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-heartbeat"></i>Sistema de Predicción de Diabetes</h1>
+            <p>Análisis predictivo utilizando Machine Learning</p>
+            <div class="model-info">
+                <strong>Modelo:</strong> {{ model_name }} | 
+                <strong>Precisión:</strong> {{ "%.2f"|format(accuracy * 100) }}%
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Form Section -->
+            <div class="form-section">
+                <h2><i class="fas fa-clipboard-list"></i>Datos del Paciente</h2>
+                <form id="predictionForm">
+                    {% for feature_name, feature_data in features.items() %}
+                    <div class="form-group">
+                        <label for="{{ feature_name }}">{{ feature_data.label }}</label>
+                        <span class="description">{{ feature_data.description }}</span>
+                        <input 
+                            type="number" 
+                            id="{{ feature_name }}" 
+                            name="{{ feature_name }}"
+                            min="{{ feature_data.min }}"
+                            max="{{ feature_data.max }}"
+                            step="{{ feature_data.step }}"
+                            required
+                            placeholder="Ingrese {{ feature_data.label|lower }}"
+                        >
+                        <div class="input-info">
+                            <span>Min: {{ feature_data.min }} {{ feature_data.unit }}</span>
+                            <span>Max: {{ feature_data.max }} {{ feature_data.unit }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-search"></i>
+                        Realizar Predicción
+                    </button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div class="result-section">
+                <h2><i class="fas fa-chart-bar"></i>Resultados de la Predicción</h2>
+                
+                <!-- Placeholder -->
+                <div class="result-placeholder" id="resultPlaceholder">
+                    <i class="fas fa-bullseye"></i>
+                    <p>Complete el formulario y presione "Realizar Predicción" para ver los resultados</p>
+                </div>
+
+                <!-- Loading -->
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner"></div>
+                    <p>Analizando datos...</p>
+                </div>
+
+                <!-- Error Message -->
+                <div class="error-message" id="errorMessage"></div>
+
+                <!-- Results -->
+                <div class="result-content" id="resultContent">
+                    <div class="prediction-card" id="predictionCard">
+                        <h3 id="predictionTitle"><i class="fas fa-exclamation-triangle"></i>Resultado del Análisis</h3>
+                        <div class="probability" id="predictionLabel">-</div>
+                        <p id="predictionDescription">-</p>
+                    </div>
+
+                    <div class="probability-bars">
+                        <div class="probability-bar">
+                            <label>Probabilidad de NO tener Diabetes</label>
+                            <div class="bar-container">
+                                <div class="bar-fill no-diabetes" id="barNoDiabetes" style="width: 0%">
+                                    <span id="probNoDiabetes">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="probability-bar">
+                            <label>Probabilidad de tener Diabetes</label>
+                            <div class="bar-container">
+                                <div class="bar-fill" id="barDiabetes" style="width: 0%">
+                                    <span id="probDiabetes">0%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-summary">
+                        <h4><i class="fas fa-file-medical-alt"></i>Resumen de Datos Ingresados</h4>
+                        <div class="summary-grid" id="summaryGrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Evaluación Segundo Parcial - Base de Datos | 
+            <a href="/about"><i class="fas fa-info-circle"></i> Acerca del Modelo</a></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+</html>
